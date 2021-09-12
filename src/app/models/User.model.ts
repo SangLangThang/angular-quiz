@@ -31,3 +31,14 @@ export interface Question {
     answer:number;
     answers:string[];
 }
+
+export interface QuestionsDto {
+  name: string;
+  topicId: string;
+  answers: QuestionAnswers[];
+}
+
+export interface QuestionAnswers {
+  name: string;
+  status: boolean;
+}

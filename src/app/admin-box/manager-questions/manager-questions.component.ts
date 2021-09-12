@@ -63,7 +63,7 @@ export class ManagerQuestionsComponent implements OnInit {
     console.log(questionId)
   }
 
-  addQuestion(topicId:string){
-    this.router.navigate(['/admin/edit']);
-  }
+  // addQuestion(topicId:string){
+  //   this.router.navigate(['/admin/edit']);
+  // }
 }
