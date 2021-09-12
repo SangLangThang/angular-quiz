@@ -1,10 +1,9 @@
-import { FormControl } from '@angular/forms';
-import { FirebaseService } from './../../shared/firebase.service';
-import { Component, Input, OnInit } from '@angular/core';
-import { Levels, Topics, Questions } from 'src/app/models/User.model';
-import { take } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Router } from '@angular/router';
+import { take } from 'rxjs/operators';
+import { Levels, Questions, Topics } from 'src/app/models/User.model';
+import { FirebaseService } from './../../shared/firebase.service';
 
 @Component({
   selector: 'app-manager-questions',
@@ -12,15 +11,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./manager-questions.component.scss'],
 })
 export class ManagerQuestionsComponent implements OnInit {
-  constructor(
-    private firebaseService: FirebaseService,
-    private router: Router
-  ) {}
   levels: Levels[];
   topics: Topics[];
   questions: Questions[];
   showQuestion:boolean=true;
   showFormQuestion:boolean=false;
+
+  constructor(
+    private firebaseService: FirebaseService,
+    private router: Router
+  ) {}
+
   ngOnInit(): void {
     this.firebaseService
       .getLevels()
@@ -29,6 +30,7 @@ export class ManagerQuestionsComponent implements OnInit {
         this.levels = levels;
       });
   }
+
   onChange(levelId: string) {
     this.firebaseService
       .getTopics(levelId)
@@ -38,6 +40,7 @@ export class ManagerQuestionsComponent implements OnInit {
         console.log(topics);
       });
   }
+
   tabChanged(tabChangeEvent: MatTabChangeEvent): void {
     this.firebaseService
       .getQuestions(tabChangeEvent.tab.ariaLabel)
@@ -46,16 +49,21 @@ export class ManagerQuestionsComponent implements OnInit {
         this.questions = questions;
       });
   }
+
   goForm() {
     this.router.navigate(['/admin/edit']);
   }
+
   editQuestion(questionId:string){
     console.log(questionId)
+    this.router.navigate(['/admin/edit']);
   }
+
   deleteQuestion(questionId:string){
     console.log(questionId)
   }
+
   addQuestion(topicId:string){
-    
+    this.router.navigate(['/admin/edit']);
   }
 }
