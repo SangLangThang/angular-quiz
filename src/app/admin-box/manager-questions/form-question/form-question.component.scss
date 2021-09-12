@@ -1,0 +1,22 @@
+.form-group {
+  display: flex;
+  gap: 10px;
+}
+.group-btn {
+  display: flex;
+  gap: 5px;
+  button {
+    margin-top: 10px;
+  }
+}
+
+.custom-input {
+  width: 80%;
+  & textarea {
+    width: 80%;
+  }
+}
+:host{
+  width: 100%;
+  padding: 10px;
+}

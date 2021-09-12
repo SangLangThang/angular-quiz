@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'quiz-app';
+  showStartBox=true
+  showReportBox=false;
+  toggleShow(){
+    this.showReportBox=!this.showReportBox;
+    this.showStartBox=!this.showStartBox;
+  }
 }

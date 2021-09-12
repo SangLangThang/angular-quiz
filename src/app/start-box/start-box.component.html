@@ -1,0 +1,41 @@
+<div class="section">
+  
+  <form class="example-form" [formGroup]="userForm">
+   
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Họ và Tên</mat-label>
+      <input type="text" matInput formControlName="ten" />
+      
+    </mat-form-field>
+    <div class="full-width multi-input">
+      <mat-form-field appearance="outline" class="custom-input">
+        <mat-label>Trường</mat-label>
+        <input type="text" matInput formControlName="truong" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="custom-input">
+        <mat-label>Lớp</mat-label>
+        <input type="text" matInput formControlName="lop" />
+        
+      </mat-form-field>
+    </div>
+    <div class="full-width multi-input">
+      <mat-form-field appearance="outline" class="custom-input">
+        <mat-label>Cấp</mat-label>
+        <mat-select formControlName="cap" name="cap">
+          <mat-option *ngFor="let e of cap_data" [value]="e.value" >
+            {{ e.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="custom-input">
+        <mat-label>Bộ đề</mat-label>
+        <mat-select formControlName="de" >
+          <mat-option *ngFor="let e of de_data" [value]="e.value">
+            {{ e.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" type="submit" class="start-btn" (click)="onSubmit()">Bắt đầu</button>
+  </form>
+</div>

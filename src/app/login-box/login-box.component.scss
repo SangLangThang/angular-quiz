@@ -1,0 +1,19 @@
+.report {
+  text-align: center;
+  &-action {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  &-btn{
+      background-color: #6200ee;
+      color: white;
+  }
+}
+
+.report-table{
+    width: 100%;
+}
+.custom-input{
+  margin: 10px;
+}
