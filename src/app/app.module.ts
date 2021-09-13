@@ -15,10 +15,11 @@ import { DialogComponent } from './dialog/dialog.component';
 
 import { MaterialModule } from './material-module';
 import { AdminModule } from './admin-box/admin.module';
-import { QuizBoxComponent } from './quiz-box/quiz-box.component';
 import { InfoBoxComponent } from './quiz-box/info-box/info-box.component';
 import { GameBoxComponent } from './quiz-box/game-box/game-box.component';
 import { QuestionBoxComponent } from './quiz-box/question-box/question-box.component';
+import { QuizBoxComponent } from './quiz-box/quiz-box.component';
+import { ResultBoxComponent } from './quiz-box/result-box/result-box.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,10 +27,11 @@ import { QuestionBoxComponent } from './quiz-box/question-box/question-box.compo
     LoginBoxComponent,
     ReportBoxGridComponent,
     DialogComponent,
-    QuizBoxComponent,
     InfoBoxComponent,
     GameBoxComponent,
     QuestionBoxComponent,
+    QuizBoxComponent,
+    ResultBoxComponent
     
   ],
   imports: [
