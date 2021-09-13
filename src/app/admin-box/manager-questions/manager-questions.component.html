@@ -20,10 +20,10 @@
               <mat-icon color="primary" *ngIf="j==question.answer">check_circle</mat-icon>
             </p>
           </mat-expansion-panel>
-          <button mat-raised-button color="primary" (click)="editQuestion(question.questionId)">Sửa</button>
+          <button mat-raised-button color="primary" [routerLink]="['edit', question.questionId]">Sửa</button>
           <button mat-raised-button color="warn" (click)="deleteQuestion(question.questionId)">Xoá</button>
         </div>
-        <button mat-raised-button color="primary" (click)="addQuestion(topic.topicId)">Thêm</button>
+        <button mat-raised-button color="primary" routerLink="new">Thêm</button>
     </mat-tab>
   </mat-tab-group>
 </div>
