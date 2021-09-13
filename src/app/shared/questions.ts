@@ -1,5 +1,5 @@
 import { Question } from "../models/User.model";
-import { bb_1,bb_2,bb_3,bb_4 } from "./imgUrl";
+
 export const questions:Question[] = [
     {
       name:
@@ -34,16 +34,5 @@ export const questions:Question[] = [
         "Đi xe đạp chở 1 người ngồi sau.",
       ],
     },
-    {
-      name:
-        "Test biển báo giao thông",
-      answer: 1,
-      type:'picture',
-      answers: [
-        bb_1,
-        bb_2,
-        bb_3,
-        bb_4
-      ],
-    },
+    
   ];

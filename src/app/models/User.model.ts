@@ -29,6 +29,5 @@ export interface Questions {
 export interface Question {
     name:string;
     answer:number;
-    type?:string;
     answers:string[];
 }

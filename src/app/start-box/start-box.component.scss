@@ -1,43 +1,28 @@
-.section {
-  width: 60%;
-  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-  background: #fff;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-  margin: 20px auto;
-  padding: 30px;
-  position: relative;
-  overflow: hidden;
+
+.section{
+    width: 80%;
+    margin: 0 auto;
 }
-.example-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-  background: #fff;
+.example-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
-.custom-input {
-  width: calc(50% - 5px);
+.custom-input{
+    width: calc(50% - 5px)
 }
-.full-width {
-  width: 100%;
+.full-width{
+    width: 100%;
 }
-.multi-input {
-  display: flex;
-  justify-content: space-between;
+.multi-input{
+    display: flex;
+    justify-content: space-between;
 }
-.start-btn {
-  width: 50%;
-  background-color: #6200ee;
+.start-btn{
+    width: 50%;
+    background-color: #6200ee;
 }
-input {
-  font-size: 16px;
-}
-.bg-img {
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  object-fit: cover;
+input{
+    font-size: 16px;
 }
