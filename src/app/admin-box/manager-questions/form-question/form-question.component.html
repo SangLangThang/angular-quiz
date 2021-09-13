@@ -1,48 +1,36 @@
-<div *ngIf="form" class="section w-100">
-  <form class="form w-100" [formGroup]="form" (ngSubmit)="onSubmit(form.value)" >
+<div class="section">
+  <form class="form" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
     <mat-form-field appearance="outline" class="custom-input">
       <mat-label>Câu hỏi</mat-label>
-      <textarea type="text" matInput [mat-autosize]="true" formControlName="name" ></textarea>
+      <textarea type="text" matInput [mat-autosize]="true" formControlName="name"></textarea>
     </mat-form-field>
     <div *ngIf="answers.controls.length > 0">
       <div *ngFor="let c of answers.controls; let i = index" formArrayName="answers">
+
         <div class="form-group" [formGroupName]="i">
           <mat-form-field appearance="outline" class="custom-input">
             <mat-label>Lựa chọn {{ i + 1 }}</mat-label>
             <textarea type="text" matInput [mat-autosize]="true" formControlName="name"></textarea>
           </mat-form-field>
-          <div class="group-btn">
-            <!-- <mat-radio-button formControlName="status" [value]="i" [style]="{ marginTop: '20px' }"></mat-radio-button> -->
-            <input type="checkbox" formControlName="status" />
+          
+          <div class="btn-submit">
+            <mat-checkbox class="check_box" formControlName="status"></mat-checkbox>
             <button type="button" mat-mini-fab color="primary" (click)="addAnswer()">+</button>
-            <button type="button" *ngIf="answers.controls.length > 1" mat-mini-fab color="warn" (click)="removeAnswer(i)">-</button>
+            <button type="button" *ngIf="answers.controls.length > 1" mat-mini-fab color="warn"
+              (click)="removeAnswer(i)">-</button>
           </div>
         </div>
+
       </div>
     </div>
     <div class="btn-submit">
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        [disabled]="!form.valid"
-      >
+      <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">
         Xác nhận
       </button>
-      <button
-        mat-raised-button
-        color="danger"
-        (click)="form.reset()"
-        type="button"
-      >
+      <button mat-raised-button color="danger" (click)="form.reset()" type="button">
         Reset
       </button>
-      <button
-        mat-raised-button
-        color="warn"
-        routerLink="/admin/questions"
-        type="button"
-      >
+      <button mat-raised-button color="warn" routerLink="/admin/questions" type="button">
         Quay lại
       </button>
     </div>

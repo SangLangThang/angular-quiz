@@ -1,34 +1,52 @@
+import { FirebaseService } from 'src/app/shared/firebase.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   Component,
-  ComponentFactoryResolver,
   ElementRef,
   OnInit,
   QueryList,
   Renderer2,
   ViewChildren,
 } from '@angular/core';
-import { Question } from 'src/app/models/User.model';
+import { ClientForm, Question } from 'src/app/models/User.model';
 import { questions } from 'src/app/shared/questions';
+import {take} from 'rxjs/operators'
 @Component({
   selector: 'app-game-box',
   templateUrl: './game-box.component.html',
   styleUrls: ['./game-box.component.scss'],
 })
 export class GameBoxComponent implements OnInit {
-  constructor(private renderer: Renderer2) {}
-  /* @ViewChildren('option', { read: ViewContainerRef })
-  public options: QueryList<ViewContainerRef>; */
+  constructor(
+    private renderer: Renderer2,
+    private routes: ActivatedRoute,
+    private firebaseService: FirebaseService
+  ) {}
+
   @ViewChildren('option') options: QueryList<ElementRef>;
 
   ngOnInit(): void {
-    this.ques_total = this.questions.length;
-    this.startGame()
+    this.clientId=this.routes.snapshot.params['client']
+    this.topicId=this.routes.snapshot.params['topic']
+    this.firebaseService.getClient(this.clientId).pipe(take(1)).subscribe((client:any)=>{
+      this.clientData=client
+      this.client=client.name;
+    })
+    this.firebaseService.getQuestions(this.topicId).pipe(take(1)).subscribe((questions:any)=>{
+      this.questions=questions
+      this.ques_total = questions.length;
+      this.startGame();
+    })
+    
   }
   /* load data for game */
-  showResult=false;
-  showGame=true;
-  questions: Question[] = questions;
+  showResult = false;
+  showGame = true;
+  questions: Question[] = [];
   /* variable start game */
+  clientId:string
+  topicId:string
+  clientData:ClientForm
   text_btn_next = 'Câu tiếp theo';
   time_start = 5;
   percent = '0%';
@@ -39,11 +57,10 @@ export class GameBoxComponent implements OnInit {
   start: any;
   result_icon = '🎉';
   result_slogan = 'Thật tuyệt!';
-  client = 'Test';
-  can_next_question=false;
+  client = '';
+  can_next_question = false;
   /* game function */
   startGame() {
-    
     this.time_start = 5;
     this.percent = '0%';
     this.start = setInterval(() => {
@@ -52,11 +69,11 @@ export class GameBoxComponent implements OnInit {
       if (this.time_start === 0) {
         clearInterval(this.start);
         this.optionSelected(1000, this.questions[0].answer);
-        
       }
     }, 1000);
   }
-  endGame(){
+  
+  endGame() {
     if (this.score > 3) {
       this.result_icon = '🎉';
       this.result_slogan = 'Thật tuyệt!';
@@ -69,12 +86,12 @@ export class GameBoxComponent implements OnInit {
         this.result_slogan = 'Thật tiếc!';
       }
     }
-    this.showGame=false;
-    this.showResult=true
-
+    this.showGame = false;
+    this.showResult = true;
+    this.firebaseService.updateClient(this.clientId,this.score)
+    
   }
   nextQuestion() {
-    
     if (this.ques_start < this.ques_total) {
       this.startGame();
       this.ques_start++;
@@ -83,13 +100,13 @@ export class GameBoxComponent implements OnInit {
       this.text_btn_next = 'Hoàn thành';
     }
     if (this.ques_start === this.ques_total) {
-      this.endGame()
+      this.endGame();
     }
-    this.can_next_question=false;
+    this.can_next_question = false;
   }
 
   optionSelected(select: number, answer: number) {
-    this.can_next_question=true;
+    this.can_next_question = true;
     clearInterval(this.start);
     this.options.forEach((ele: ElementRef, i: number) => {
       if (select === i) {

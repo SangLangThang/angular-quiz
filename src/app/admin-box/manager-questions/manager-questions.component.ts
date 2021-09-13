@@ -13,9 +13,14 @@ import { FirebaseService } from './../../shared/firebase.service';
 export class ManagerQuestionsComponent implements OnInit {
   levels: Levels[];
   topics: Topics[];
+  topicId:string;
+  levelId:string;
+  topicsData: Topics[];
   questions: Questions[];
-  showQuestion:boolean=true;
-  showFormQuestion:boolean=false;
+  canAddTopics:boolean=false;
+  showQuestion: boolean = true;
+  showFormQuestion: boolean = false;
+  selectValue: string = '';
 
   constructor(
     private firebaseService: FirebaseService,
@@ -27,40 +32,49 @@ export class ManagerQuestionsComponent implements OnInit {
       .getLevels()
       .pipe(take(1))
       .subscribe((levels: any) => {
+        console.log("get levels ok")
         this.levels = levels;
+      });
+    this.firebaseService
+      .getTopics()
+      .pipe(take(1))
+      .subscribe((topics: any) => {
+        console.log("get topics ok")
+        this.topicsData = topics;
       });
   }
 
+  selectedTopics(levelId: string, topics: Topics[]): Topics[] {
+    return topics.filter((topic) => topic.levelId === levelId);
+  }
   onChange(levelId: string) {
-    this.firebaseService
-      .getTopics(levelId)
-      .pipe(take(1))
-      .subscribe((topics: any) => {
-        this.topics = topics;
-        console.log(topics);
-      });
+    this.topics = this.selectedTopics(levelId, this.topicsData);
+    this.canAddTopics=true;
+    this.levelId=levelId
   }
 
   tabChanged(tabChangeEvent: MatTabChangeEvent): void {
+    this.topicId=tabChangeEvent.tab.ariaLabel
+    
     this.firebaseService
-      .getQuestions(tabChangeEvent.tab.ariaLabel)
+      .getQuestions(this.topicId)
       .pipe(take(1))
       .subscribe((questions: any) => {
+        console.log("get questions ok")
         this.questions = questions;
       });
   }
-
   goForm() {
     this.router.navigate(['/admin/edit']);
   }
 
-  editQuestion(questionId:string){
-    console.log(questionId)
+  editQuestion(questionId: string) {
+    console.log(questionId);
     this.router.navigate(['/admin/edit']);
   }
 
-  deleteQuestion(questionId:string){
-    console.log(questionId)
+  deleteQuestion(questionId: string) {
+    console.log(questionId);
   }
 
   // addQuestion(topicId:string){

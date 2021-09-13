@@ -7,7 +7,7 @@ import { StartBoxComponent } from './start-box/start-box.component';
 const routes: Routes = [
   { path: '', component: StartBoxComponent },
   { path: 'login', component: LoginBoxComponent },
-  { path: 'start', component: QuizBoxComponent },
+  { path: 'start/:client/:level/:topic', component: QuizBoxComponent },
   {
     path: 'admin',
     loadChildren: () => import('./admin-box/admin.module').then(m => m.AdminModule),

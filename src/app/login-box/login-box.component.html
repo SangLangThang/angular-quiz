@@ -1,21 +1,10 @@
-<!-- <mat-form-field *ngIf="!isLogged" appearance="outline">
-    <mat-label>Mật khẩu</mat-label>
-    <input matInput [type]="hide ? 'password' : 'text'">
-    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
-</mat-form-field> -->
 <div class="report">
   <div *ngIf="!isLogged">
     <h2>
       Phần này chỉ dành cho giáo viên.<br />Nếu bạn là giáo viên xin hãy nhập tài
       khoản và mật khẩu
     </h2>
-    <form
-      [formGroup]="formGroup"
-      (ngSubmit)="onSubmit(formGroup.value)"
-      class="form"
-    >
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
       <mat-form-field appearance="outline" class="custom-input">
         <mat-label>Tài khoản</mat-label>
         <input type="text" matInput formControlName="username" />
@@ -27,13 +16,7 @@
       </mat-form-field>
 
       <div class="form-element">
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit"
-          class="button"
-          [disabled]="!formGroup.valid"
-        >
+        <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">
           Xác nhận
         </button>
       </div>
@@ -43,32 +26,17 @@
     <h2>
       Xin chào {{formGroup.value.username}}
     </h2>
-      <div class="report-action">
-        <button
-          mat-raised-button
-          color="basic"
-          class="report-btn"
-          (click)="reportPDF()"
-        >
-          Xem PDF
-        </button>
-        <button
-          mat-raised-button
-          color="basic"
-          class="report-btn"
-          (click)="printPDF()"
-        >
-          In PDF
-        </button>
-        <button
-          mat-raised-button
-          color="basic"
-          class="report-btn"
-          (click)="printPDF()"
-        >
-          Tạo câu hỏi
-        </button>
-      </div>
+    <div class="report-action">
+      <button mat-raised-button color="basic" class="report-btn" (click)="reportPDF()">
+        Xem PDF
+      </button>
+      <button mat-raised-button color="basic" class="report-btn" (click)="printPDF()">
+        In PDF
+      </button>
+      <button mat-raised-button color="basic" class="report-btn" (click)="printPDF()">
+        Tạo câu hỏi
+      </button>
+    </div>
     <app-report-box-grid [dataSource]="dataSource"></app-report-box-grid>
   </div>
 </div>

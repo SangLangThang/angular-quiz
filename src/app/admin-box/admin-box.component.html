@@ -1,6 +1,6 @@
 <mat-drawer-container class="container" autosize>
   <mat-drawer class="sidenav" mode="side" opened>
-    <a routerLink="questions" mat-raised-button> Quản lý câu hỏi </a>
+    <a routerLink="questions" mat-raised-button class="quiz-btn"> Quản lý câu hỏi </a>
     <a routerLink="clients" mat-raised-button class="quiz-btn">
       Quản lý danh sách
     </a>
@@ -8,7 +8,5 @@
 
   <div class="sidenav-content">
     <router-outlet></router-outlet>
-    <!-- <app-manager-questions [levels]="levels" *ngIf="showQuestions" ></app-manager-questions>
-      <app-manager-clients *ngIf="showClient" ></app-manager-clients> -->
   </div>
 </mat-drawer-container>

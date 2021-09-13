@@ -13,7 +13,7 @@ const adminRoutes: Routes = [
       {
         path: '',
         children: [
-          { path: 'questions/new', component: FormQuestionComponent },
+          { path: 'questions/new/:levelId/:topicId', component: FormQuestionComponent },
           { path: 'questions/edit/:id', component: FormQuestionComponent },
           { path: 'clients', component: ManagerClientsComponent },
           { path: 'questions', component: ManagerQuestionsComponent },

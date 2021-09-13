@@ -1,13 +1,13 @@
+:host {
+  width: 100%;
+  padding: 10px;
+}
+textarea{
+  height: 100%;
+}
 .form-group {
   display: flex;
   gap: 10px;
-}
-.group-btn {
-  display: flex;
-  gap: 5px;
-  button {
-    margin-top: 10px;
-  }
 }
 
 .custom-input {
@@ -16,12 +16,8 @@
     width: 80%;
   }
 }
-:host{
-  width: 100%;
-  padding: 10px;
-}
-.btn-submit{
-  button {
+.btn-submit {
+  * {
     margin-right: 1rem;
     &:last-child {
       margin-right: 0;

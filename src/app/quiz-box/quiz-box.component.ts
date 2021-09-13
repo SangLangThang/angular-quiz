@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-quiz-box',
   templateUrl: './quiz-box.component.html',
@@ -11,7 +10,6 @@ export class QuizBoxComponent implements OnInit {
   showGame: boolean = false;
   ngOnInit(): void {}
   startGame(){
-    console.log("test")
     this.showInfo=!this.showInfo;
     this.showGame=!this.showGame
   }

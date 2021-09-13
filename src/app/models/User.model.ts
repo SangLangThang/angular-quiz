@@ -42,3 +42,11 @@ export interface QuestionsDto {
     name: string;
     status: boolean;
   }
+  export interface ClientForm {
+    name: string;
+    school:string;
+    class:string;
+    topicId:string;
+    levelId:string;
+    score:number;
+  }

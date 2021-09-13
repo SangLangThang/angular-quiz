@@ -1,5 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-info-box',
   templateUrl: './info-box.component.html',
@@ -10,7 +9,6 @@ export class InfoBoxComponent implements OnInit {
   @Output() continues = new EventEmitter();
   ngOnInit(): void {}
   onContinues() {
-    console.log('Continues');
     this.continues.emit();
   }
 }

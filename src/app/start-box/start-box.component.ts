@@ -1,12 +1,9 @@
-import { FirebaseService } from './../shared/firebase.service';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Levels, Questions, Topics } from '../models/User.model';
+import { FirebaseService } from './../shared/firebase.service';
+import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-start-box',
   templateUrl: './start-box.component.html',
@@ -18,31 +15,62 @@ export class StartBoxComponent implements OnInit {
     private firebaseService: FirebaseService,
     private router: Router
   ) {}
-  userForm!: FormGroup;
+  clientForm: FormGroup;
+  levels: Levels[] = [];
+  topicsData: Topics[] = [];
+  topics: Topics[] = [];
+  questions: Questions[] = [];
+  levelDefault = '';
   ngOnInit(): void {
-    this.userForm = this.fb.group({
-      ten: ['', [Validators.required]],
-      truong: ['', [Validators.required]],
-      lop: ['', [Validators.required]],
-      de: [null, [Validators.required]],
-      cap: [null, [Validators.required]],
-    });
+    this.buildForm();
+    this.firebaseService
+      .getLevels()
+      .pipe(take(1))
+      .subscribe((levels: any) => {
+        console.log('get data levels finish');
+        this.levels = levels;
+        this.clientForm.get('levelId')?.setValue(this.levels[2].levelId);
+        //use 2 because levels[2]={name:Cấp 1}
+      });
+    this.firebaseService
+      .getTopics()
+      .pipe(take(1))
+      .subscribe((topics: any) => {
+        console.log('get data topics finish:');
+        this.topicsData = topics;
+        this.topics = this.selectedTopics(
+          this.levels[2].levelId,
+          this.topicsData
+        );
+        this.clientForm.get('topicId')?.setValue(this.topics[0].topicId);
+      });
   }
 
-  cap_data = [
-    { value: 'cap1', viewValue: 'Cấp 1' },
-    { value: 'cap2', viewValue: 'Cấp 2' },
-    { value: 'cap3', viewValue: 'Cấp 3' },
-  ];
-  de_data = [
-    { value: 'de1', viewValue: 'Đề 1' },
-    { value: 'de2', viewValue: 'Đề 2' },
-    { value: 'de3', viewValue: 'Đề 3' },
-  ];
+  buildForm() {
+    this.clientForm = this.fb.group({
+      name: ['', [Validators.required]],
+      school: ['', [Validators.required]],
+      class: ['', [Validators.required]],
+      topicId: [null, [Validators.required]],
+      levelId: [null, [Validators.required]],
+    });
+  }
+  selectedTopics(levelId: string, topics: Topics[]): Topics[] {
+    return topics.filter((topic) => topic.levelId === levelId);
+  }
+  onLevelChange(levelId: string) {
+    this.topics = this.selectedTopics(levelId, this.topicsData);
+  }
+
   onSubmit() {
-    /* this.firebaseService.getUsers().subscribe(e=>{
-      console.log(e)
-    }) */
-    this.router.navigate(['start']);
+    const newClient = { score: 0, ...this.clientForm.value };
+    this.firebaseService.addClient(newClient).then((value) => {
+      this.router.navigate([
+        'start',
+        value.id,
+        this.clientForm.value.levelId,
+        this.clientForm.value.topicId,
+      ]);
+    });
   }
 }
