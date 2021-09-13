@@ -32,7 +32,9 @@ export class FirebaseService {
      return this.firestore.collection('questions',ref=>ref.where('topicId', '==', topicId))
      .valueChanges({ idField: 'questionId' })
    }
-   
+   getQuestion(id: string) {
+    return this.firestore.collection('questions').doc(id).valueChanges()
+  }
    create(user: User): any {
     this.usersRef.add({ ...user });
    }

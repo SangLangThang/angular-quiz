@@ -32,3 +32,13 @@ export interface Question {
     type?:string;
     answers:string[];
 }
+export interface QuestionsDto {
+    name: string;
+    topicId: string;
+    answers: QuestionAnswers[];
+  }
+  
+  export interface QuestionAnswers {
+    name: string;
+    status: boolean;
+  }
