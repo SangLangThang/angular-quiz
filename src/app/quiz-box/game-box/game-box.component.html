@@ -16,14 +16,11 @@
         </span>
       </div>
       <div class="option_list" [class.flex]="question.type==='picture'">
-        <div class="option" #option *ngFor="let option of question.answers; index as i"
-          (click)="optionSelected(i, question.answer)">
-          <span *ngIf="question.type==='picture'; else nopicture" class="option_img">
-            <img [src]="option" >
+        <div class="option" #option *ngFor="let answer of question.answers; index as i" (click)="optionSelected(i, question.answer)">
+          <span *ngIf="question.type==='picture'" class="option_img">
+            <img [src]="questionName(answer)">
           </span>
-          <ng-template #nopicture>
-            <span>{{ option }}</span>
-          </ng-template>
+          <span *ngIf="question.type!=='picture'">{{ questionName(answer) }}</span>
           <mat-icon class="icon tick">check</mat-icon>
           <mat-icon class="icon cross">close</mat-icon>
         </div>

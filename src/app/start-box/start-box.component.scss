@@ -1,21 +1,25 @@
 .section {
   width: fit-content;
   box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-  background: #fff;
   border-radius: 5px;
   transition: all 0.3s ease;
   margin: 20px auto;
-  padding: 30px;
   position: relative;
   overflow: hidden;
+  background-image: url('../../assets/body_bg_2.jpg');
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-.example-form {
+form {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-  background: #fff;
+  background: rgb(255 255 255 / 12%);
+  padding: 1rem;
 }
 .custom-input {
   width: calc(50% - 5px);
@@ -40,4 +44,13 @@ input {
   top: 0;
   left: 0;
   object-fit: cover;
+}
+
+@media only screen and (max-width: 600px) {
+  .section {
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    margin: 0 auto;
+  }
 }

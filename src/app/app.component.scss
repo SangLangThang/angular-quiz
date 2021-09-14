@@ -1,5 +1,5 @@
 .logo {
-  max-width: 100px;
+  max-width: 50px;
 }
 .login-btn {
   width: fit-content;
@@ -10,10 +10,9 @@
   flex: 1 1 auto;
 }
 .header{
-    height: 110px;
-    box-shadow: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 14%), 0 1px 18px 0 rgb(0 0 0 / 12%);
+  height: 70px;
+  box-shadow: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 14%), 0 1px 18px 0 rgb(0 0 0 / 12%);
 }
 .container{
   position: relative;
-
 }
